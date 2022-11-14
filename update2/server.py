@@ -69,7 +69,14 @@ def list_functions():
     return s
 
 def update():
+    for attr in dir(functions):
+        if attr not in ("__name__", "__file__"):
+            delattr(functions, attr)
     importlib.reload(functions)
+
+    for attr in dir(protocol):
+        if attr not in ("__name__", "__file__"):
+            delattr(protocol, attr)
     importlib.reload(protocol)
     return ("Protocol && Functions has been reloaded", 1)
 
