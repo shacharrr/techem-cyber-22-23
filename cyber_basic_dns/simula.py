@@ -1,0 +1,35 @@
+class Register:
+    def __init__(self, data: list):
+        self.index, self.xedni, self.index_type, self.timeout = data
+
+    def __str__(self):
+        return f"{self.index}, {self.xedni}, {self.index_type}, {self.timeout}"
+
+    def print_as_str(self):
+        print(f"Index: {self.index}\tXedni: {self.xedni}\tIndex_Type: {self.index_type}\tTimeout: {self.timeout}")
+
+class Simula:
+    def __init__(self, data_file: str) -> None:
+        self.data_file = data_file
+        self.registers = []
+
+    def parse_from_file(self) -> None:
+        f = open(self.data_file, "r")
+
+        for line in f.readlines():
+            reg = Register(line.split(", "))
+            self.registers.append(reg)
+
+        f.close()
+
+    def write_to_file(self, reg: Register) -> None:
+        f = open(self.data_file, "a")
+        f.write(f"{reg}")
+        f.close()
+
+    def insert(self, reg: Register) -> None:
+        self.registers[reg.index] = reg
+        self.write_to_file(reg)
+
+    def get(self, index) -> Register:
+        return self.register[index]

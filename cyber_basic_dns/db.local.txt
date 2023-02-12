@@ -1,0 +1,2 @@
+www.example.com, 190.16.16.1, A, 120
+190.16.16.1, www.example.com , PTR, 100
